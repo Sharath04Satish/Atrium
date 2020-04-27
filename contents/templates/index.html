@@ -7,9 +7,9 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Atrium</a>
+          <a href="{{ url_for('index') }}" class="brand-logo">Atrium</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{{ url_for('signUp') }}">Sign In</a></li>
+            <li><a class="links hvr-grow" href="{{ url_for('signUp') }}">Sign In</a></li>
           </ul>
         </div>
     </nav>
@@ -33,7 +33,7 @@
     <div class="container">
         <h2>Why Choose our service?</h2>
         <div class="row">
-            <div class="col l4 s12 info-cards">
+            <div class="col l4 s12 info-cards hvr-grow">
                 <div>
                     <h3>Machine Learning</h3>
                     <i class="medium material-icons">code</i>
@@ -41,7 +41,7 @@
                 </div>
                
             </div>
-            <div class="col l4 s12 info-cards">
+            <div class="col l4 s12 info-cards hvr-grow">
                 <div>
                     <h3>Archiving</h3>
                     <i class="medium material-icons">storage</i>
@@ -49,7 +49,7 @@
                     the best treatment possible</p>
                 </div>
             </div>
-            <div class="col l4 s12 info-cards">
+            <div class="col l4 s12 info-cards hvr-grow">
                 <div>
                     <h3>Connection</h3>
                     <i class="medium material-icons">perm_phone_msg</i>

@@ -6,11 +6,11 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Atrium</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('results') }}">Results</a></li>
-                <li><a href="{{ url_for('signUp') }}">Sign Out</a></li>
-            </ul>
+                <a href="{{ url_for('index') }}" class="brand-logo hvr-grow">Atrium</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a class="hvr-grow" href="{{ url_for('results') }}">Results</a></li>
+                    <li><a class="hvr-grow" href="{{ url_for('signIn') }}">Sign Out</a></li>
+                </ul>
             </div>
         </nav>
     </div>
@@ -49,8 +49,8 @@
                     {% if output == 'Normal' %}
                         <div class="class_absent">
                             <div class="row">
-                                <div class="col l6 class-absent-content">
-                                    <h2>Congratulations! You are healthy</h2>
+                                <div class="col l6 class-absent-content hvr-grow">
+                                    <h2>You are healthy</h2>
                                     <p>Based on the analysis of your ECG report, arrhythmia was not detected</p>
                                     <p>Do not forget to exercise though</p>
                                 </div>
@@ -63,7 +63,7 @@
                     {% else %}
                         <div class="class-present">
                             <div class="row">
-                                <div class="col l6 class-present-content">
+                                <div class="col l6 class-present-content hvr-grow">
                                     <h2>{{ output }}</h2>
                                     <p>Based on the analysis of your ECG report, {{ output }} was detected</p>
                                     <p>It is recommended that you consult a heart specialist immediately</p>
@@ -79,7 +79,7 @@
                                 <div class="col l6 todo-image">
                                     <img src="../static/images/health.png">
                                 </div>
-                                <div class="col l6 todo-content">
+                                <div class="col l6 todo-content hvr-grow">
                                     <h3>A todo list</h3>
                                     <ul>
                                         <li>Stay hydrated</li>

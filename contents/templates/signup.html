@@ -14,11 +14,9 @@
                             
                             {% if form.name.errors %}
                                 {{ form.name(id="icon_person", class="is-invalid", placeholder='Name') }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.name.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
+                                {% for error in form.name.errors %}
+                                    <span class="error-msg">{{ error }}</span>
+                                {% endfor %}
                             {% else %}
                                 {{ form.name(id="icon_person", placeholder='Name') }}
                             {% endif %}
@@ -28,12 +26,10 @@
                             <i id="icons" class="material-icons prefix">email</i>
                             
                             {% if form.email.errors %}
-                                {{ form.email(id="icon_email", class="is-invalid", placeholder='Email') }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.email.errors %}
-                                        <p>{{ error }}</p>
-                                    {% endfor %}
-                                </div>
+                            {{ form.email(id="icon_email", class="is-invalid", placeholder='Email') }}
+                                {% for error in form.email.errors %}
+                                    <span class="error-msg">{{ error }}</span>
+                                {% endfor %}
                             {% else %}
                                 {{ form.email(id="icon_email", placeholder='Email') }}
                             {% endif %}
@@ -45,12 +41,10 @@
                             <i id="icons" class="material-icons prefix">lock</i>
 
                             {% if form.password.errors %}
-                                {{ form.password(id="icon_lock", class="is-invalid", placeholder='Password') }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.password.errors %}
-                                        <p>{{ error }}</p>
-                                    {% endfor %}
-                                </div>
+                            {{ form.password(id="icon_lock", class="is-invalid", placeholder='Password') }}
+                                {% for error in form.password.errors %}
+                                    <span class="error-msg">{{ error }}</span>
+                                {% endfor %}
                             {% else %}
                                 {{ form.password(id="icon_lock", placeholder='Password') }} 
                             {% endif %}
@@ -61,18 +55,19 @@
 
                             {% if form.confirm_password.errors %}
                                 {{ form.confirm_password(id="icon_lock", class="is-invalid", placeholder='Confirm Password') }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.confirm_password.errors %}
-                                        <p>{{ error }}</p>
-                                    {% endfor %}
-                                </div>
+                                {% for error in form.confirm_password.errors %}
+                                    {% if error == 'Password must be between 8 and 20 characters' %}
+                                        <span></span>
+                                    {% else %}
+                                        <span class="error-msg">{{ error }}</span>
+                                    {% endif %}
+                                {% endfor %}
                             {% else %}
                                 {{ form.confirm_password(id="icon_lock", placeholder='Confirm Password') }} 
                             {% endif %}
 
                         </div>
                     </div>
-                    <!-- <a id="sign-btn" class="waves-effect waves-light btn">Sign Up</a> -->
                     {{ form.sign_up(id="sign-btn", class="btn") }}
                 </form>
                 <p>Already have an account? <b><a href="{{ url_for('signIn') }}">Sign In</a></b></p>
