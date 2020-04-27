@@ -1,11 +1,12 @@
 from flask import render_template, url_for, redirect
 from contents import app, db, bcrypt
 from contents.forms import SignInForm, SignUpForm
-from contents.models import Users
-from flask_login import login_user
+from contents.models import Users, TestResult
+from flask_login import login_user, current_user, logout_user
 from contents.file_upload import CSVFile
 from werkzeug.utils import secure_filename
-import os
+import os, shutil
+from datetime import date
 from glob import glob
 from keras.models import load_model
 from keras.utils import to_categorical 
@@ -23,12 +24,15 @@ def index():
 @app.route('/signin', methods=('GET', 'POST'))
 def signIn():
     form = SignInForm()
+    message = None
     if form.validate_on_submit():
         user = Users.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect(url_for('index'))
-    return render_template('signin.html', form=form)
+            return redirect(url_for('results'))
+        else:
+            message = 'No account found for this email address'
+    return render_template('signin.html', form=form, message=message)
 
 
 @app.route('/signup', methods=('GET', 'POST'))
@@ -42,6 +46,15 @@ def signUp():
         return redirect(url_for('signIn'))
 
     return render_template('signup.html', form=form)
+
+
+@app.route('/results')
+def results():
+    test_results = TestResult.query.all()
+    if TestResult.query.filter_by(user_id=current_user.id).first():
+        return render_template('results.html', test_results=test_results)
+    else:
+        return render_template('results.html', test_results=test_results, count = 0)
 
 
 @app.route('/upload', methods=('GET', 'POST'))
@@ -76,12 +89,20 @@ def csvUpload():
 
         for file in files:
             os.remove(file)
+        
+        today_date = date.today()
+        result = TestResult(result=output, date_test=today_date, patient=current_user)
+        db.session.add(result)
+        db.session.commit()
 
         return render_template('upload.html', form=form, output=output, showReport=True)
 
     return render_template('upload.html', form=form, showReport=False)
 
 
-@app.route('/resuts')
-def results():
-    return render_template('results.html', output=output)
+
+@app.route('/signout')
+def signOut():
+    logout_user()
+    return redirect(url_for('index'))
+    
