@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 from collections import Counter
 
-model = load_model('D:\\Atrium\\atrium_model.h5')
+model = load_model('D:\\Atrium\\atrium_model_1.h5')
 
 @app.route('/')
 def index():
