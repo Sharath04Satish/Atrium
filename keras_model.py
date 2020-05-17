@@ -8,11 +8,11 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.utils import to_categorical 
 
-df = pd.read_csv("D:\\Final Year Project\\wfdb-python\\qrs-tutorial\\train4.csv", header=None)
+df = pd.read_csv("D:\\Final Year Project\\wfdb-python\\qrs-tutorial\\train5.csv", header=None)
 X_train = df.values[:, :-1]
 y_train = df.values[:, -1].astype(int)
 
-df = pd.read_csv("D:\\Final Year Project\\wfdb-python\\qrs-tutorial\\test4.csv", header=None)
+df = pd.read_csv("D:\\Final Year Project\\wfdb-python\\qrs-tutorial\\test5.csv", header=None)
 X_test = df.values[:, :-1]
 y_test = df.values[:, -1].astype(int)
 
@@ -39,4 +39,4 @@ pred_test= model.predict(X_test)
 scores2 = model.evaluate(X_test, y_test, verbose=0)
 print('Accuracy on test data: {}% \n Error on test data: {}'.format(scores2[1], 1 - scores2[1]))    
 
-model.save('atrium_model.h5')
+model.save('atrium_model_1.h5')
