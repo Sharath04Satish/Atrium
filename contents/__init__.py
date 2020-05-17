@@ -7,7 +7,7 @@ from flask_login import LoginManager
 app = Flask(__name__)
 
 csrf = CSRFProtect(app)
-app.config['SECRET_KEY'] = '424f396696e4aa10887285e12953942a'
+app.config['SECRET_KEY'] = 'ENTER YOUR SECRET KEY HERE'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)
